@@ -1,0 +1,14 @@
+app:
+  package: GoForge
+  version: 0.6.2
+build:
+  output: build/goforge.exe
+  optimisation: true
+  
+  env:
+    GOOS: windows
+    GOARCH: amd64
+
+  flags:
+    - -ldflags
+    - "-s -w"

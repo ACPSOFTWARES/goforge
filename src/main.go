@@ -22,20 +22,10 @@ func main() {
 	case "run":
 		utils.Run()
 	case "build":
-		if len(os.Args) == 3 {
-			switch os.Args[2] {
-			case "run":
-				utils.Build()
-				utils.Chvenv("../")
-				utils.Run()
-			default:
-				color.Red("Argument '%v' not defined!\n", os.Args[2])
-			}
-		} else {
-			utils.Build()
-		}
+		utils.Buildscr()
 	case "install":
-		utils.Copy()
+		utils.Buildscr()
+		utils.Install()
 	default:
 		color.Yellow("Usage: goforge [run | build | new <pkg-name> ]\n")
 		return

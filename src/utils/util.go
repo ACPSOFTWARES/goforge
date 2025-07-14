@@ -160,7 +160,7 @@ func Run() {
 	fmt.Println()
 }
 
-func Copy() {
+func Install() {
 	cfg, err := LoadConfig(CONFIG_FILE)
 	if err != nil {
 		color.Red("❌ Failed to load config: %v\n", err)

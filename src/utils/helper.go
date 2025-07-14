@@ -158,3 +158,18 @@ func Check(err error) {
 		os.Exit(1)
 	}
 }
+
+func Buildscr() {
+	if len(os.Args) == 3 {
+		switch os.Args[2] {
+		case "run":
+			Build()
+			Chvenv("../")
+			Run()
+		default:
+			color.Red("Argument '%v' not defined!\n", os.Args[2])
+		}
+	} else {
+		Build()
+	}
+}

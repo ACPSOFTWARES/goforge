@@ -34,6 +34,8 @@ func main() {
 		} else {
 			utils.Build()
 		}
+	case "install":
+		utils.Copy()
 	default:
 		color.Yellow("Usage: goforge [run | build | new <pkg-name> ]\n")
 		return

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -84,7 +85,7 @@ func CreateFile(srcfilename string, content string) {
 }
 
 func CreateCfgFile(srcfilename string, srccontent string) {
-	content := "app:\n  package: " + os.Args[2] + "\n"
+	content := "app:\n  package: " + os.Args[2] + "\n" + "  version: 0.0.1" + "\n" + "build:\n  output: build/" + os.Args[2] + ".exe\n"
 	if _, err := os.Stat(srcfilename); os.IsNotExist(err) {
 		// File does not exist, so create it
 		file, err := os.Create(srcfilename)
@@ -122,5 +123,38 @@ func Init() {
 	if err != nil {
 		color.Red("❌ Error Initialising Project: %v\n", err)
 		return
+	}
+}
+
+func CopyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer func() { _ = out.Close() }()
+
+	_, err = io.Copy(out, in)
+	if err != nil {
+		return err
+	}
+
+	// Force the same permissions as source (optional)
+	info, err := os.Stat(src)
+	if err == nil {
+		_ = os.Chmod(dst, info.Mode())
+	}
+	return err
+}
+
+func Check(err error) {
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
 	}
 }

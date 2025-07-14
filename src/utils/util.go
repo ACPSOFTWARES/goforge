@@ -3,9 +3,12 @@ package utils
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/fatih/color"
 )
+
+const destFolder = `change it` // <- change as you like
 
 var CONFIG_FILE = "GoForge.yaml"
 
@@ -21,10 +24,7 @@ func main(){
 
 var Pkg string
 
-var cfgcontent = `  version: 0.0.1
-build:
-  output: build/out.exe
-  optimisation: true
+var cfgcontent = `  optimisation: true
   
   env:
     GOOS: windows
@@ -158,4 +158,37 @@ func Run() {
 		return
 	}
 	fmt.Println()
+}
+
+func Copy() {
+	cfg, err := LoadConfig(CONFIG_FILE)
+	if err != nil {
+		color.Red("❌ Failed to load config: %v\n", err)
+		return
+	}
+	src := cfg.Build.Output
+
+	// Resolve absolute paths
+	absSrc, err := filepath.Abs(src)
+	Check(err)
+
+	// Verify source exists and is a regular file
+	info, err := os.Stat(absSrc)
+	Check(err)
+	if info.IsDir() {
+		fmt.Printf("Error: '%s' is a directory, not a file\n", absSrc)
+		os.Exit(1)
+	}
+
+	// Ensure destination folder exists
+	err = os.MkdirAll(destFolder, 0o755)
+	Check(err)
+
+	destPath := filepath.Join(destFolder, filepath.Base(absSrc))
+
+	// Copy (overwrite if exists)
+	err = CopyFile(absSrc, destPath)
+	Check(err)
+
+	fmt.Printf("File copied to %s\n", destPath)
 }

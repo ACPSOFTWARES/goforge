@@ -9,13 +9,13 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		color.Yellow("Usage: goforge [run | build | init <pkg-name> ]\n")
+		color.Yellow("⚠️ Usage: goforge [run | build | init <pkg-name> ]\n")
 		return
 	}
 	switch os.Args[1] {
 	case "new":
 		if len(os.Args) < 3 {
-			color.Yellow("Usage: goforge [run | build | init <pkg-name> ]\n")
+			color.Yellow("⚠️ Usage: goforge [run | build | init <pkg-name> ]\n")
 			return
 		}
 		utils.New()
@@ -27,7 +27,7 @@ func main() {
 		utils.Buildscr()
 		utils.Install()
 	default:
-		color.Yellow("Usage: goforge [run | build | new <pkg-name> ]\n")
+		color.Yellow("⚠️ Usage: goforge [run | build | new <pkg-name> ]\n")
 		return
 	}
 }

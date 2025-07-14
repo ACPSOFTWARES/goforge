@@ -20,13 +20,15 @@ Install GoForge using:
 
 `````bash
 go install github.com/ACPSOFTWARES/goforge
+`````
 
 🚀 Usage
 Use goforge in your terminal to manage Go project builds and automation:
 
 ````bash
 goforge <command> [args]
-
+````
+`````
 | Command                          | Description                                                                |
 | -------------------------------- | -------------------------------------------------------------------------- |
 | `goforge new <pkg-name>`         | Create a new Go project in the current directory and initialize `go.mod`.  |

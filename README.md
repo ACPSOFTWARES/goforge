@@ -14,14 +14,6 @@
 
 ---
 
-## 📥 Installation
-
-Install GoForge using:
-
-`````bash
-go install github.com/ACPSOFTWARES/goforge
-`````
-
 🚀 Usage
 Use goforge in your terminal to manage Go project builds and automation:
 

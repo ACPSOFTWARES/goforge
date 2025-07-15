@@ -5,6 +5,7 @@ import (
 	"go/build"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/fatih/color"
 )
@@ -193,6 +194,27 @@ func Install() {
 	Check(err)
 
 	fmt.Printf("File copied to %s\n", destPath)
+}
+
+func Remove() {
+	cfg, err := LoadConfig(CONFIG_FILE)
+	if err != nil {
+		color.Red("❌ Failed to load config: %v\n", err)
+		return
+	}
+
+	binPath := Gobin()
+	out := strings.Replace(cfg.Build.Output, "build/", "", 1)
+	src := binPath + "/" + out
+
+	err = os.Remove(src)
+	if err != nil {
+		fmt.Println("Error removing program:", err)
+		return
+	}
+
+	fmt.Println("Program removed successfully")
+
 }
 
 func Gobin() string {

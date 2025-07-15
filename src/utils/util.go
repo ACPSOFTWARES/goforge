@@ -2,13 +2,14 @@ package utils
 
 import (
 	"fmt"
+	"go/build"
 	"os"
 	"path/filepath"
 
 	"github.com/fatih/color"
 )
 
-const destFolder = `change it` // <- change as you like
+var destFolder = Gobin() // <- change as you like
 
 var CONFIG_FILE = "GoForge.yaml"
 
@@ -130,6 +131,7 @@ func Build() {
 		}
 		color.Green("✅ Build Successful!\n")
 	}
+	Chvenv("../")
 
 }
 
@@ -191,4 +193,14 @@ func Install() {
 	Check(err)
 
 	fmt.Printf("File copied to %s\n", destPath)
+}
+
+func Gobin() string {
+	gobin := os.Getenv("GOBIN")
+	if gobin == "" {
+		// Fallback to GOPATH/bin if GOBIN is not set
+		gopath := build.Default.GOPATH
+		gobin = filepath.Join(gopath, "bin")
+	}
+	return gobin
 }

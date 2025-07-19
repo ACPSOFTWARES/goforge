@@ -12,7 +12,7 @@ import (
 
 var destFolder = Gobin() // <- change as you like
 
-var CONFIG_FILE = "GoForge.yaml"
+const CONFIG_FILE = "GoForge.yaml"
 
 var srcfilename = "./src/main.go"
 

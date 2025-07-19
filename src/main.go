@@ -8,7 +8,8 @@ import (
 	"github.com/fatih/color"
 )
 
-const VERSION = "V0.8.8"
+const VERSION = "V0.8.9"
+const VER_DESC = "Some Corrections"
 
 func main() {
 	if len(os.Args) < 2 {

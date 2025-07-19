@@ -1,6 +1,6 @@
 app:
   package: GoForge
-  version: 0.8.8
+  version: 0.8.9
 build:
   output: build/goforge.exe
   optimisation: true

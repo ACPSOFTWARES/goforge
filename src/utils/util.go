@@ -193,7 +193,7 @@ func Install() {
 	err = CopyFile(absSrc, destPath)
 	Check(err)
 
-	fmt.Printf("File copied to %s\n", destPath)
+	fmt.Printf("Program installed to %s\n", destPath)
 }
 
 func Remove() {

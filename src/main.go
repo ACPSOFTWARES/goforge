@@ -8,8 +8,8 @@ import (
 	"github.com/fatih/color"
 )
 
-const VERSION = "V0.8.9"
-const VER_DESC = "Some Corrections"
+const VERSION = "V0.9.0"
+const VER_DESC = "Clean Command Added"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -32,6 +32,8 @@ func main() {
 		utils.Install()
 	case "remove":
 		utils.Remove()
+	case "clean":
+		utils.Clean()
 	case "version":
 		fmt.Println(VERSION)
 	case "help":

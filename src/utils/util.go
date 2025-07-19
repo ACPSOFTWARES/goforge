@@ -246,3 +246,19 @@ Available Commands:
 For more information, visit: https://example.com/goforge
 `)
 }
+
+func Clean() {
+	cfg, err := LoadConfig(CONFIG_FILE)
+	if err != nil {
+		color.Red("❌ Failed to load config: %v\n", err)
+		return
+	}
+	src := cfg.Build.Output
+	err = os.Remove(src)
+	if err != nil {
+		fmt.Println("Error removing program:", err)
+		return
+	}
+
+	fmt.Println("Project Cleaned Successfully!")
+}

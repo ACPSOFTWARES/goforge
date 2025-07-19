@@ -8,6 +8,8 @@ import (
 	"github.com/fatih/color"
 )
 
+const VERSION = "V0.8.6"
+
 func main() {
 	if len(os.Args) < 2 {
 		color.Yellow("⚠️  Usage: goforge <command> [arguments]\n")
@@ -29,6 +31,8 @@ func main() {
 		utils.Install()
 	case "remove":
 		utils.Remove()
+	case "version":
+		fmt.Println(VERSION)
 	case "help":
 		fmt.Println(`Goforge - A minimal forge to build and manage your Go-based projects
 

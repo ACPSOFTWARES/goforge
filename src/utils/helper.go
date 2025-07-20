@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"path"
 	"path/filepath"
 
 	"github.com/fatih/color"
@@ -85,7 +86,8 @@ func CreateFile(srcfilename string, content string) {
 }
 
 func CreateCfgFile(srcfilename string, srccontent string) {
-	content := "app:\n  package: " + os.Args[2] + "\n" + "  version: 0.0.1" + "\n" + "build:\n  output: build/" + os.Args[2] + ".exe\n"
+	buildstr := path.Base(os.Args[2])
+	content := "app:\n  package: " + os.Args[2] + "\n" + "  version: 0.0.1" + "\n" + "build:\n  output: build/" + buildstr + ".exe\n"
 	if _, err := os.Stat(srcfilename); os.IsNotExist(err) {
 		// File does not exist, so create it
 		file, err := os.Create(srcfilename)
